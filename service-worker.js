@@ -5,10 +5,12 @@ const APP_ASSETS = [
   "/app.html",
   "/offline.html",
   "/manifest.json",
+  "/site.webmanifest",
   "/favicon.ico",
   "/favicon-32x32.png",
   "/favicon-16x16.png",
   "/apple-touch-icon.png",
+  "/favicon.svg",
   "/icons/icon-72.png",
   "/icons/icon-96.png",
   "/icons/icon-128.png",
@@ -34,6 +36,22 @@ self.addEventListener("activate", (event) => {
       )
     )
   );
+});
+
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    caches.match(event.request).then((res) => {
+      return (
+        res ||
+        fetch(event.request).catch(() => {
+          if (event.request.mode === "navigate") {
+            return caches.match("/offline.html");
+          }
+        })
+      );
+    })
+  );
+});
 });
 
 self.addEventListener("fetch", (event) => {
