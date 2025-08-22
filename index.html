@@ -4,7 +4,6 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>BudgetBee - Track. Budget. Save.</title>
-  <!-- Favicons and Manifest -->
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -34,6 +33,34 @@
       </div>
       <div class="feature">
         <span class="material-icons">account_balance_wallet</span>
+        <h3>Budgets</h3>
+        <p>Set monthly budgets and never overspend.</p>
+      </div>
+      <div class="feature">
+        <span class="material-icons">pie_chart</span>
+        <h3>Reports</h3>
+        <p>Visual insights into your spending habits.</p>
+      </div>
+      <div class="feature">
+        <span class="material-icons">lock</span>
+        <h3>Privacy</h3>
+        <p>Your data stays private on your device.</p>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <p>🐝 BudgetBee © 2025. All rights reserved.</p>
+  </footer>
+  <script>
+    let deferredPrompt; const installBtn = document.getElementById("installBtn");
+    window.addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); deferredPrompt = e; installBtn.style.display = "inline-block"; });
+    installBtn.addEventListener("click", async () => { if (deferredPrompt) { deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; installBtn.style.display = "none"; } });
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+  </script>
+</body>
+</html>
         <h3>Budgets</h3>
         <p>Set monthly budgets and never overspend.</p>
       </div>
