@@ -1,4 +1,5 @@
 const CACHE_NAME = "budgetbee-v2";
+
 const APP_ASSETS = [
   "/",
   "/index.html",
@@ -34,6 +35,24 @@ self.addEventListener("activate", (event) => {
       Promise.all(
         keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
       )
+    )
+  );
+});
+
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    caches.match(event.request).then((res) => {
+      return (
+        res ||
+        fetch(event.request).catch(() => {
+          if (event.request.mode === "navigate") {
+            return caches.match("/offline.html");
+          }
+        })
+      );
+    })
+  );
+});
     )
   );
 });
