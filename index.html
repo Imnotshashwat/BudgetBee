@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BudgetBee - Track. Budget. Save.</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <link rel="shortcut icon" href="favicon.ico"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
+  <link rel="manifest" href="site.webmanifest"/>
+  <meta name="theme-color" content="#FFD600"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="hero">
+    <img src="icons/icon-192.png" alt="BudgetBee Logo" />
+    <h1>Track. Budget. Save.</h1>
+    <p>The smart expense tracker that helps you control money wisely.</p>
+    <a href="app.html" class="cta">Launch App</a>
+    <button id="installBtn" class="cta" style="display:none;">📲 Install Web App</button>
+  </div>
+  <section class="features" id="features">
+    <h2>Why Choose BudgetBee?</h2>
+    <div class="grid">
+      <div class="feature">
+        <span class="material-icons">trending_down</span>
+        <h3>Expense Tracking</h3>
+        <p>Log your daily expenses easily and stay organized.</p>
+      </div>
+      <div class="feature">
+        <span class="material-icons">account_balance_wallet</span>
+        <h3>Budgets</h3>
+        <p>Set monthly budgets and never overspend.</p>
+      </div>
+      <div class="feature">
+        <span class="material-icons">pie_chart</span>
+        <h3>Reports</h3>
+        <p>Visual insights into your spending habits.</p>
+      </div>
+      <div class="feature">
+        <span class="material-icons">lock</span>
+        <h3>Privacy</h3>
+        <p>Your data stays private on your device.</p>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <p>🐝 BudgetBee © 2025. All rights reserved.</p>
+  </footer>
+  <script>
+    let deferredPrompt; 
+    const installBtn = document.getElementById("installBtn");
+    window.addEventListener("beforeinstallprompt", (e) => { 
+      e.preventDefault(); 
+      deferredPrompt = e; 
+      installBtn.style.display = "inline-block"; 
+    });
+    installBtn.addEventListener("click", async () => { 
+      if (deferredPrompt) { 
+        deferredPrompt.prompt(); 
+        await deferredPrompt.userChoice; 
+        deferredPrompt = null; 
+        installBtn.style.display = "none"; 
+      } 
+    });
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+  </script>
+</body>
+</html>
