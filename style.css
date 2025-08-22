@@ -13,4 +13,3 @@ body { margin:0; font-family:'Roboto',Arial,sans-serif; background:var(--primary
 .feature{background:var(--secondary-bg);padding:2rem;border-radius:16px;text-align:center;}
 .feature .material-icons{font-size:2.2rem;color:var(--accent);}
 footer{background:var(--secondary-bg);color:var(--muted-fg);text-align:center;padding:1.5rem;font-size:.9rem;}
-  /* CSS omitted for brevity: it matches the latest package, mobile-first, stylish, well-commented. */
